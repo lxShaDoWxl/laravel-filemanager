@@ -13,7 +13,7 @@ class LfmStorageRepositoryTest extends TestCase
 {
     private $storage;
 
-    public function setUp()
+    public function setUp(): void
     {
         parent::setUp();
 
@@ -33,22 +33,22 @@ class LfmStorageRepositoryTest extends TestCase
         $this->storage = new LfmStorageRepository('foo/bar', $helper);
     }
 
-    public function tearDown()
+    public function tearDown(): void
     {
         m::close();
     }
 
-    public function testMagicCall()
+    public function testMagicCall(): void
     {
         $this->assertEquals('baz', $this->storage->functionToCall());
     }
 
-    public function testRootPath()
+    public function testRootPath(): void
     {
         $this->assertEquals('foo/bar', $this->storage->rootPath());
     }
 
-    public function testMove()
+    public function testMove(): void
     {
         $new_lfm_path = m::mock(LfmPath::class);
         $new_lfm_path->shouldReceive('path')->with('storage')->andReturn('foo/bar/baz');

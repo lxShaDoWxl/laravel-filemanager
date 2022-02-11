@@ -11,14 +11,14 @@ use UniSharp\LaravelFilemanager\LfmPath;
 
 class LfmPathTest extends TestCase
 {
-    public function tearDown()
+    public function tearDown(): void
     {
         m::close();
 
         parent::tearDown();
     }
 
-    public function testMagicGet()
+    public function testMagicGet(): void
     {
         $storage = m::mock(LfmStorage::class);
 
@@ -34,7 +34,7 @@ class LfmPathTest extends TestCase
         $this->assertEquals($storage, $path->storage);
     }
 
-    public function testMagicCall()
+    public function testMagicCall(): void
     {
         $storage = m::mock(LfmStorage::class);
         $storage->shouldReceive('foo')->andReturn('bar');
@@ -51,7 +51,7 @@ class LfmPathTest extends TestCase
         $this->assertEquals('bar', $path->foo());
     }
 
-    public function testDirAndNormalizeWorkingDir()
+    public function testDirAndNormalizeWorkingDir(): void
     {
         $helper = m::mock(Lfm::class);
         $helper->shouldReceive('input')->with('working_dir')->once()->andReturn('foo');
@@ -63,7 +63,7 @@ class LfmPathTest extends TestCase
         $this->assertEquals('bar', $path->dir('bar')->normalizeWorkingDir());
     }
 
-    public function testSetNameAndGetName()
+    public function testSetNameAndGetName(): void
     {
         $path = new LfmPath(m::mock(Lfm::class));
 
@@ -72,7 +72,7 @@ class LfmPathTest extends TestCase
         $this->assertEquals('bar', $path->getName());
     }
 
-    public function testPath()
+    public function testPath(): void
     {
         $helper = m::mock(Lfm::class);
         $helper->shouldReceive('getRootFolder')->andReturn('/foo');
@@ -93,7 +93,7 @@ class LfmPathTest extends TestCase
         $this->assertEquals('files/foo/bar', $path->setName('bar')->path('storage'));
     }
 
-    public function testUrl()
+    public function testUrl(): void
     {
         $helper = m::mock(Lfm::class);
         $helper->shouldReceive('getRootFolder')->andReturn('/foo');
@@ -112,7 +112,7 @@ class LfmPathTest extends TestCase
         $this->assertEquals('/files/foo/foo', $path->setName('foo')->url());
     }
 
-    public function testFolders()
+    public function testFolders(): void
     {
         $storage = m::mock(LfmStorage::class);
         $storage->shouldReceive('directories')->andReturn(['foo/bar']);
@@ -135,7 +135,7 @@ class LfmPathTest extends TestCase
         $this->assertInstanceOf(LfmItem::class, $path->folders()[0]);
     }
 
-    public function testFiles()
+    public function testFiles(): void
     {
         $storage = m::mock(LfmStorage::class);
         $storage->shouldReceive('files')->andReturn(['foo/bar']);
@@ -157,7 +157,7 @@ class LfmPathTest extends TestCase
         $this->assertInstanceOf(LfmItem::class, $path->files()[0]);
     }
 
-    public function testPretty()
+    public function testPretty(): void
     {
         $helper = m::mock(Lfm::class);
         $helper->shouldReceive('getNameFromPath')->andReturn('bar');
@@ -171,7 +171,7 @@ class LfmPathTest extends TestCase
         $this->assertInstanceOf(LfmItem::class, $path->pretty('foo'));
     }
 
-    public function testCreateFolder()
+    public function testCreateFolder(): void
     {
         $storage = m::mock(LfmStorage::class);
         $storage->shouldReceive('rootPath')->andReturn(realpath(__DIR__ . '/../') . '/storage/app');
@@ -190,7 +190,7 @@ class LfmPathTest extends TestCase
         $this->assertNull($path->createFolder('bar'));
     }
 
-    public function testCreateFolderButFolderAlreadyExists()
+    public function testCreateFolderButFolderAlreadyExists(): void
     {
         $storage = m::mock(LfmStorage::class);
         $storage->shouldReceive('exists')->andReturn(true);

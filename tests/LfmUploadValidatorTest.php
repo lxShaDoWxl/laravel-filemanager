@@ -20,7 +20,7 @@ function trans()
 
 class LfmUploadValidatorTest extends TestCase
 {
-    public function testPassesSizeLowerThanIniMaximum()
+    public function testPassesSizeLowerThanIniMaximum(): void
     {
         $uploaded_file = m::mock(UploadedFile::class);
         $uploaded_file->shouldReceive('getError')->andReturn(UPLOAD_ERR_OK);
@@ -30,7 +30,7 @@ class LfmUploadValidatorTest extends TestCase
         $this->assertEquals($validator->sizeLowerThanIniMaximum(), $validator);
     }
 
-    public function testFailsSizeLowerThanIniMaximum()
+    public function testFailsSizeLowerThanIniMaximum(): void
     {
         $uploaded_file = m::mock(UploadedFile::class);
         $uploaded_file->shouldReceive('getError')->andReturn(UPLOAD_ERR_INI_SIZE);
@@ -42,7 +42,7 @@ class LfmUploadValidatorTest extends TestCase
         $validator->sizeLowerThanIniMaximum();
     }
 
-    public function testPassesUploadWasSuccessful()
+    public function testPassesUploadWasSuccessful(): void
     {
         $uploaded_file = m::mock(UploadedFile::class);
         $uploaded_file->shouldReceive('getError')->andReturn(UPLOAD_ERR_OK);
@@ -52,7 +52,7 @@ class LfmUploadValidatorTest extends TestCase
         $this->assertEquals($validator->uploadWasSuccessful(), $validator);
     }
 
-    public function testFailsUploadWasSuccessful()
+    public function testFailsUploadWasSuccessful(): void
     {
         $uploaded_file = m::mock(UploadedFile::class);
         $uploaded_file->shouldReceive('getError')->andReturn(UPLOAD_ERR_PARTIAL);
@@ -64,7 +64,7 @@ class LfmUploadValidatorTest extends TestCase
         $validator->uploadWasSuccessful();
     }
 
-    public function testPassesNameIsNotDuplicate()
+    public function testPassesNameIsNotDuplicate(): void
     {
         $uploaded_file = m::mock(UploadedFile::class);
 
@@ -77,7 +77,7 @@ class LfmUploadValidatorTest extends TestCase
         $this->assertEquals($validator->nameIsNotDuplicate('new_file_name', $lfm_path), $validator);
     }
 
-    public function testFailsNameIsNotDuplicate()
+    public function testFailsNameIsNotDuplicate(): void
     {
         $uploaded_file = m::mock(UploadedFile::class);
 
@@ -92,7 +92,7 @@ class LfmUploadValidatorTest extends TestCase
         $validator->nameIsNotDuplicate('new_file_name', $lfm_path);
     }
 
-    public function testPassesIsNotExcutable()
+    public function testPassesIsNotExcutable(): void
     {
         $uploaded_file = m::mock(UploadedFile::class);
         $uploaded_file->shouldReceive('getMimeType')->andReturn('image/jpeg');
@@ -102,7 +102,7 @@ class LfmUploadValidatorTest extends TestCase
         $this->assertEquals($validator->isNotExcutable(), $validator);
     }
 
-    public function testFailsIsNotExcutable()
+    public function testFailsIsNotExcutable(): void
     {
         $uploaded_file = m::mock(UploadedFile::class);
         $uploaded_file->shouldReceive('getMimeType')->andReturn('text/x-php');
@@ -114,7 +114,7 @@ class LfmUploadValidatorTest extends TestCase
         $validator->isNotExcutable();
     }
 
-    public function testPassesMimeTypeIsValid()
+    public function testPassesMimeTypeIsValid(): void
     {
         $uploaded_file = m::mock(UploadedFile::class);
         $uploaded_file->shouldReceive('getMimeType')->andReturn('image/jpeg');
@@ -124,7 +124,7 @@ class LfmUploadValidatorTest extends TestCase
         $this->assertEquals($validator->mimeTypeIsValid(['image/jpeg']), $validator);
     }
 
-    public function testFailsMimeTypeIsValid()
+    public function testFailsMimeTypeIsValid(): void
     {
         $uploaded_file = m::mock(UploadedFile::class);
         $uploaded_file->shouldReceive('getMimeType')->andReturn('image/jpeg');
@@ -136,7 +136,7 @@ class LfmUploadValidatorTest extends TestCase
         $validator->mimeTypeIsValid(['image/png']);
     }
 
-    public function testPassesSizeIsLowerThanConfiguredMaximum()
+    public function testPassesSizeIsLowerThanConfiguredMaximum(): void
     {
         $uploaded_file = m::mock(UploadedFile::class);
         $uploaded_file->shouldReceive('getSize')->andReturn(500 * 1000);
@@ -146,7 +146,7 @@ class LfmUploadValidatorTest extends TestCase
         $this->assertEquals($validator->sizeIsLowerThanConfiguredMaximum(1000), $validator);
     }
 
-    public function testFailsSizeIsLowerThanConfiguredMaximum()
+    public function testFailsSizeIsLowerThanConfiguredMaximum(): void
     {
         $uploaded_file = m::mock(UploadedFile::class);
         $uploaded_file->shouldReceive('getSize')->andReturn(2000 * 1000);
