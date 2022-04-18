@@ -25,7 +25,7 @@ class LfmStorageRepository
 
     public function rootPath()
     {
-        return $this->disk->getDriver()->getAdapter();
+        return $this->disk->path('');
     }
 
     public function move($new_lfm_path)
