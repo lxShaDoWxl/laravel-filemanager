@@ -110,7 +110,7 @@ class LfmItem
 
     public function time()
     {
-        return $this->lfm->lastModified();
+        return $this->isFile() ? $this->lfm->lastModified() : '';
     }
 
     public function thumbUrl()
