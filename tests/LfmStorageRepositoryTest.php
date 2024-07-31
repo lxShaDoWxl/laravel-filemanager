@@ -24,6 +24,7 @@ class LfmStorageRepositoryTest extends TestCase
         $disk->shouldReceive('functionToCall')->with('foo/bar')->andReturn('baz');
         $disk->shouldReceive('directories')->with('foo')->andReturn(['foo/bar']);
         $disk->shouldReceive('move')->with('foo/bar', 'foo/bar/baz')->andReturn(true);
+        $disk->shouldReceive('path')->andReturn('foo/bar');
 
         $helper = m::mock(Lfm::class);
         $helper->shouldReceive('config')->with('disk')->andReturn('local');
